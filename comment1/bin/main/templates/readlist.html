@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Insert title here</title>
+
+</head>
+
+<body>
+
+<table class="table">
+
+<thead class="table-dark">
+
+<tr>
+
+<th>번호</th>
+
+<th>제목</th>
+
+<th>작성일시</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr th:each="comment, loop : ${coments}">
+
+<td th:text="${loop.count}"></td>
+
+<td><a th:href="@{|/comment/readdetail/${comment.id}|}" th:text="${comment.title}"></a></td>
+
+
+
+</tr>
+
+</tbody>
+
+</table>
+
+<a href="/comment/create">글작성</a>
+
+</body>
+
+</html>
