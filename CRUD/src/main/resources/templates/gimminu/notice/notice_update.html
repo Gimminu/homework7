@@ -1,10 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
 <form th:action="@{/gimminu/notice/notice_update}" method="post">
     <input type="hidden" name="id" th:value="${notice.id}">
     <input type="hidden" name="date" th:value="${notice.date}">
@@ -19,5 +15,5 @@
     <input type="submit" value="저장" class="btn btn-secondary my-2">
 
 </form>
-</body>
+</div>>
 </html>
