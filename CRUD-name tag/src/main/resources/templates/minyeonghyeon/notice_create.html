@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout}">
 <nav th:replace="~{navbar :: navbarFragment}"></nav>
+<div layout:fragment="content">
+	<div class="container my-3">
 <div>
-	<form th:action="@{/minyeonghyeon/Notice/update}" method="post">
+	<form th:action="@{/minyeonghyeon/notice/create}" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="title" class="form-label">제목</label>
             <input type="text" name="title" id="title" class="form-control">
@@ -11,7 +13,12 @@
             <label for="content" class="form-label">내용</label>
             <textarea name="content" id="content" class="form-control" rows="10"></textarea>
         </div>
+        <input type="file" name="file1">
+        <input type="file" name="file2">
+        <input type="file" name="file3">
         <input type="submit" value="저장하기" class="btn btn-primary my-2">
     </form>
+</div>
+</div>
 </div>
 </html>

@@ -5,6 +5,9 @@
 	<h1 th:text="${notice.id}"></h1>
 	<h1 th:text="${notice.title}"></h1>
 	<h1 th:text="${notice.content}"></h1>
+	<img th:src="|${downpath}/${notice.image1}|" height="100px">
+	<img th:src="|${downpath}/${notice.image2}|" height="100px">
+	<img th:src="|${downpath}/${notice.image3}|" height="100px">
 	<h6 th:text="${#temporals.format(notice.createdate, 'yyyy-MM-dd HH:mm')}"></h6>
 	
 	<a th:href="@{|/minyeonghyeon/notice/delete/${notice.id}|}">삭제</a>

@@ -29,6 +29,10 @@ public class Notice {
 	
 	private LocalDateTime createdate;
 	
+	private String image1;
+	private String image2;
+	private String image3;
+	
 	@OneToMany(mappedBy="notice", cascade = CascadeType.REMOVE)
 	private List<Comment> commentlist;
 }

@@ -12,8 +12,9 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="board, Loop :${notice}">
-					<td><a th:href="@{|minyeonghyeon/board/detail/${notice.id}|}"
+				<tr th:each="notice, Loop :${Notices}">
+					<td th:text="${notice.id}"></td>
+					<td><a th:href="@{|/minyeonghyeon/notice/detail/${notice.id}|}"
 						   th:text="${notice.title}"></a></td>
 					<td
 						th:text="${#temporals.format(notice.createdate, 'yyyy-MM-dd HH:mm')}"></td>
@@ -22,6 +23,6 @@
 		</table>
 
 		<a href="/minyeonghyeon/notice/create">작성하기</a>
-	</div>>
+	</div>
 </div>
 </html>
