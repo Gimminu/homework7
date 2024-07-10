@@ -13,16 +13,20 @@
         <div id="fileInputContainer">
             <input type="file" name="files" class="form-control">
         </div>
-        <button type="button" onclick="addFileInput()">이미지 파일 추가</button>
+        <button class = "btn btn-secondary" type="button" onclick="addFileInput()">이미지 파일 추가</button>
         <input type="submit" value="저장하기" class="btn btn-secondary my-2">
     </form>
 <script>
-    function addFileInput(){
+    function addFileInput() {
         var container = document.getElementById("fileInputContainer");
+        var newDiv = document.createElement("div");
+        newDiv.className = "file-input-container";
         var newInput = document.createElement("input");
         newInput.type = "file";
         newInput.name = "files";
-        container.appendChild(newInput);
+        newInput.className = "form-control";
+        newDiv.appendChild(newInput);
+        container.appendChild(newDiv);
     }
 </script>
 </div>

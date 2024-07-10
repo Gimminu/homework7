@@ -12,8 +12,41 @@
         <label for="content" class="form-label">내용</label>
         <input type = "textarea" name="content" id="content" class="form-control" th:value="${notice.content}">
     </div>
+    <div th:each="image, iterStat : ${notice.images}">
+        <img th:src="|${downpath}/${image.filekey}|" height="100px" alt="Notice Image">
+        <button type="button" onclick="removeImage(${iterStat.index})">이미지 삭제</button>
+    </div>
+    <div id="fileInputContainer">
+        <input type="file" name="files" class="form-control">
+    </div>
+    <button class = "btn btn-secondary" type="button" onclick="addFileInput()">이미지 파일 추가</button>
     <input type="submit" value="저장" class="btn btn-secondary my-2">
 
 </form>
+<script>
+    function addFileInput() {
+        var container = document.getElementById("fileInputContainer");
+        var newDiv = document.createElement("div");
+        newDiv.className = "file-input-container";
+        var newInput = document.createElement("input");
+        newInput.type = "file";
+        newInput.name = "files";
+        newInput.className = "form-control";
+        newDiv.appendChild(newInput);
+        container.appendChild(newDiv);
+    }
+    function removeImage(index) {
+        var imageContainer = document.getElementById('imageContainer' + index);
+        if (imageContainer) {
+            imageContainer.style.display = 'none';
+
+            var inputForDeletion = document.createElement('input');
+            inputForDeletion.type = 'hidden';
+            inputForDeletion.name = 'deletedImages';
+            inputForDeletion.value = index;
+            document.forms[0].appendChild(inputForDeletion);
+        }
+    }
+</script>
 </div>>
 </html>

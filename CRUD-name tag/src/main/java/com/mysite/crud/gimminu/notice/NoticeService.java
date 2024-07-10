@@ -57,7 +57,26 @@ public class NoticeService {
     public void deleteById(Integer id){
         noticeRepository.deleteById(id);
     }
-    public void update(Notice notice){
-        noticeRepository.save(notice);
+    public void update(Notice notice, List<MultipartFile> files) throws IOException {
+        Notice existingNotice = noticeRepository.findById(notice.getId())
+                        .orElseThrow(() -> new DataNotFoundException("Notice not found"));
+        existingNotice.setTitle(notice.getTitle());
+        existingNotice.setContent(notice.getContent());
+        if(files!= null && !files.isEmpty()) {
+            List<Image> newImages = new ArrayList<>();
+            for (MultipartFile file : files) {
+                if (!file.isEmpty()) {
+                    String fileKey = s3Service.uploadmanyFiles(file);
+                    Image image = new Image();
+                    image.setFilekey(fileKey);
+                    image.setNotice(existingNotice);
+                    newImages.add(image);
+                }
+            }
+            if (!newImages.isEmpty()) {
+                existingNotice.getImages().addAll(newImages);
+            }
+        }
+        noticeRepository.save(existingNotice);
     }
 }
