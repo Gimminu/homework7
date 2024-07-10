@@ -7,6 +7,16 @@
 <h6 th:text="${notice.content}"></h6><br>
 <h6 th:text="${#temporals.format(notice.date, 'yyyy-MM-dd HH:mm')}"></h6>
 <br>
+    <div th:if="${notice.image1 !=null}">
+        <img th:src="|${downpath}/${notice.image1}|" height="100px">
+    </div>
+    <div th:if="${notice.image2 !=null}">
+        <img th:src="|${downpath}/${notice.image2}|" height="100px">
+    </div>
+    <div th:if="${notice.image3 !=null}">
+        <img th:src="|${downpath}/${notice.image3}|" height="100px">
+    </div>
+<br>
 <br>
 <a th:href="@{|/honghyeonji/notice/delete/${notice.id}|}">글 삭제</a>
 <a th:href="@{|/honghyeonji/notice/update/${notice.id}|}">글 수정</a>
