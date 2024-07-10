@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-@RequestMapping("/notice")
+@RequestMapping("/honghyeonji/notice")
 @Controller("honghyeonjiNoticeController")
 @RequiredArgsConstructor
 public class NoticeController {
@@ -16,18 +16,18 @@ public class NoticeController {
     @GetMapping("/readlist")
     public String readlist(Model model){
         model.addAttribute("notices", noticeService.readlist());
-        return "honghyeonji/readlist";
+        return "/honghyeonji/readlist";
     }
 
     @GetMapping("/create")
     public String creat(){
-        return "honghyeonji/create";
+        return "/honghyeonji/create";
     }
 
     @PostMapping("/create")
     public String create(@ModelAttribute Notice notice){
         noticeService.create(notice);
-        return "redirect:/notice/readlist";
+        return "redirect:/honghyeonji/notice/readlist";
 
     }
 

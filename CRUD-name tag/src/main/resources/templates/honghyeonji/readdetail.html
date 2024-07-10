@@ -1,18 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html layout:decorate="~{layout}">
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
+<div layout:fragment="content">
 <h4 th:text="${notice.id}"></h4><br>
 <h4 th:text="${notice.title}"></h4><br>
 <h6 th:text="${notice.content}"></h6><br>
 <h6 th:text="${#temporals.format(notice.date, 'yyyy-MM-dd HH:mm')}"></h6>
 <br>
 <br>
-<a th:href="@{|/notice/delete/${notice.id}|}">글 삭제</a>
-<a th:href="@{|/notice/update/${notice.id}|}">글 수정</a>
+<a th:href="@{|/honghyeonji/notice/delete/${notice.id}|}">글 삭제</a>
+<a th:href="@{|/honghyeonji/notice/update/${notice.id}|}">글 수정</a>
 <br>
 <br>
 <h5 th:text="|${#lists.size(notice.commentList)}개의 답변이 있습니다.|"></h5>
@@ -21,10 +18,9 @@
         <li th:each="comment : ${notice.commentList}" th:text="${comment.content}"></li>
     </ul>
 </div>
-<form th:action="@{|/comment/create/${notice.id}|}" method="post">
+<form th:action="@{|/honghyeonji/comment/create/${notice.id}|}" method="post">
     <textarea name="content" id="content" rows="15"></textarea>
     <input type="submit" value="답변등록">
 </form>
-
-</body>
+</div>
 </html>

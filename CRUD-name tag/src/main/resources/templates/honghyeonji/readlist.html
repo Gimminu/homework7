@@ -1,10 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html layout:decorate="~{layout}">
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
+<div layout:fragment="content">
 <table>
     <thead>
     <tr>
@@ -16,11 +13,11 @@
     <tbody>
     <tr th:each="notice, loop :${notices}">
         <td th:text="${loop.count}"></td>
-        <td><a th:href="@{|/notice/readdetail/${notice.id}|}" th:text="${notice.title}"></a></td>
+        <td><a th:href="@{|/honghyeonji/notice/readdetail/${notice.id}|}" th:text="${notice.title}"></a></td>
         <td th:text="${#temporals.format(notice.date, 'yyyy-MM-dd HH:mm')}"></td>
     </tr>
     </tbody>
 </table>
-<a th:href="@{/notice/create}">글 등록</a>
-</body>
+<a th:href="@{/honghyeonji/notice/create}">글 등록</a>
+</div>
 </html>

@@ -1,10 +1,7 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html layout:decorate="~{layout}">
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
+<div layout:fragment="content">
 	<div class="container my-3">
 		<table class="table">
 			<thead class="table-dark">
@@ -16,7 +13,7 @@
 			</thead>
 			<tbody>
 				<tr th:each="board, Loop :${notice}">
-					<td><a th:href="@{|/board/detail/${notice.id}|}"
+					<td><a th:href="@{|minyeonghyeon/board/detail/${notice.id}|}"
 						   th:text="${notice.title}"></a></td>
 					<td
 						th:text="${#temporals.format(notice.createdate, 'yyyy-MM-dd HH:mm')}"></td>
@@ -24,6 +21,7 @@
 			</tbody>
 		</table>
 
-		<a href="/min/notice/create">작성하기</a>
-</body>
+		<a href="/minyeonghyeon/notice/create">작성하기</a>
+	</div>>
+</div>
 </html>

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/notice")
+@RequestMapping("/sunghyun/notice")
 
 @Controller("sunghyunNoticeController")
 
@@ -33,7 +33,7 @@ public String create(@ModelAttribute Notice Notice) {
 
 noticeService.create(Notice);
 
-return "redirect:/notice/readlist";
+return "redirect:/sunghyun/notice/readlist";
 
 }
 
@@ -58,7 +58,7 @@ public String readdetail(Model model,@PathVariable("id")Integer id) {
 @GetMapping("/delete/{id}")//<- 서비스에서 받아오는 거임 오해하지 마삼.
 public String delete(@PathVariable("id") Integer id) { //@PathVariable("id") Integer id: 메서드의 매개변수에 @PathVariable 어노테이션을 사용하여, URL 경로에서 {id} 부분을 추출
 	noticeService.delete(id);
-	return "redirect:/notice/readlist";
+	return "redirect:/sunghyun/notice/readlist";
 }
 @GetMapping("/update/{id}") //정보를 가져오고
 public String update(Model model, @PathVariable("id")Integer id) {
@@ -72,7 +72,7 @@ public String update(@ModelAttribute Notice notice) {
 	noticeService.update(notice);
 	
 	
-	return "redirect:/notice/readlist";
+	return "redirect:/sunghyun/notice/readlist";
 }
 
 }

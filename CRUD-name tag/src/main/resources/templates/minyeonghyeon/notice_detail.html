@@ -1,17 +1,13 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html layout:decorate="~{layout}">
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
+<div layout:fragment="content">
 	<h1 th:text="${notice.id}"></h1>
 	<h1 th:text="${notice.title}"></h1>
 	<h1 th:text="${notice.content}"></h1>
 	<h6 th:text="${#temporals.format(notice.createdate, 'yyyy-MM-dd HH:mm')}"></h6>
 	
-	<a th:href="@{|/notice/delete/${notice.id}|}">삭제</a>
-	<a th:href="@{|/notice/update/${notice.id}|}">수정</a>
-	
-</body>
+	<a th:href="@{|/minyeonghyeon/notice/delete/${notice.id}|}">삭제</a>
+	<a th:href="@{|/minyeonghyeon/notice/update/${notice.id}|}">수정</a>
+</div>>
 </html>

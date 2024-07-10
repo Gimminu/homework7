@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
-@RequestMapping("/min/Notice")
+@RequestMapping("/minyeonghyeon/notice")
 @Controller("min-yeonghyeonNoticeController")
 public class NoticeController {
 	@Autowired
@@ -19,31 +19,31 @@ public class NoticeController {
 	@GetMapping("/board")
 	public String readlist(Model model) {
 		model.addAttribute("Notices", noticeService.readlist());
-		return "notice_board";
+		return "/minyeonghyeon/notice_board";
 	}
 	
 	@GetMapping("/create")
 	public String create() {
-		return "notice_create";
+		return "/minyeonghyeon/notice_create";
 	}
 	
 	@PostMapping("/create")
 	public String create(@ModelAttribute Notice notice) {
 		
 		noticeService.create(notice);
-		return "redirect:/Notice/board";
+		return "redirect:/minyeonghyeon/notice/board";
 	}
 	
 	@GetMapping("/detail/{id}")
     public String detail(Model model, @PathVariable("id") Integer id) {
         model.addAttribute("Notice", noticeService.getNotice(id));
-        return "notice_detail";
+        return "/minyeonghyeon/notice_detail";
     }
 	
 	@GetMapping("/delete/{id}")
 	public String delete( @PathVariable("id") Integer id) {
 		noticeService.delete(id);
-		return "redirect:/Notice/board";
+		return "redirect:/minyeonghyeon/Notice/board";
 	}
 	
 	@GetMapping("/update/{id}")
@@ -51,13 +51,13 @@ public class NoticeController {
 		
 		model.addAttribute("Notice", noticeService.getNotice(id));
 
-		return "notice_update";
+		return "/minyeonghyeon/notice_update";
 	}
 	
 	@PostMapping("/update")
 	public String update(@ModelAttribute Notice notice) {
 		
 		noticeService.update(notice);
-		return "redirect:/Notice/board";
+		return "redirect:/minyeonghyeon/Notice/board";
 	}
 }

@@ -14,9 +14,9 @@ import lombok.RequiredArgsConstructor;
 
 
 
-@RequestMapping("/comment")
+@RequestMapping("/minyeonghyeon/comment")
 @RequiredArgsConstructor
-@Controller("min-yeonghyeonCommentController")
+@Controller("minyeonghyeonCommentController")
 public class CommentController {
 	private final NoticeService noticeService;
 	private final CommentService commentService;
@@ -27,7 +27,7 @@ public class CommentController {
 								@RequestParam(value="content")String content) {
 		Notice notice = this.noticeService.getNotice(id);
 		commentService.create(notice, content);
-		return String.format("redirect:/notice/detail/%s", id);
+		return String.format("redirect:/minyeonghyeon/notice/detail/%s", id);
 //		return "redirect:/question/detail/"+ id;
 	}
 }

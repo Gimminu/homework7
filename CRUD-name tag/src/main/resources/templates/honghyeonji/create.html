@@ -1,14 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<form action = "/notice/create" method="post">
+<html layout:decorate="~{layout}">
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
+<div layout:fragment="content">
+<form action = "/honghyeonji/notice/create" method="post">
     <p>제목: <input type="text" name="title"></p>
     <p>내용:<input type="text" name="content"></p>
     <p><input type="submit" value="등록"></p>
 </form>
-</body>
+</div>
 </html>

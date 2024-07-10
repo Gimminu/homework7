@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@RequestMapping("/comment")
+@RequestMapping("/honghyeonji/comment")
 @Controller("honghyeonjiCommentController")
 @RequiredArgsConstructor
 public class CommentController {
@@ -21,6 +21,6 @@ public class CommentController {
     public String createComment(Model model, @PathVariable("id") Integer id, @RequestParam(value="content") String comment){
         Notice notice = this.noticeService.readdetail(id);
         this.commentService.create(notice, comment);
-        return String.format("redirect:/notice/readdetail/%s", id);
+        return String.format("redirect:/honghyeonji/notice/readdetail/%s", id);
     }
 }
