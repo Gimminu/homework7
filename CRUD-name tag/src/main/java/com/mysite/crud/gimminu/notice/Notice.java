@@ -1,8 +1,11 @@
 package com.mysite.crud.gimminu.notice;
 
+import com.mysite.crud.gimminu.Image.Image;
 import com.mysite.crud.gimminu.comment.Comment;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.awt.*;
 import java.util.List;
 
 import java.time.LocalDateTime;
@@ -21,6 +24,8 @@ public class Notice {
 
     private LocalDateTime date;
 
+    @OneToMany(mappedBy = "notice", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Image> images;
     @OneToMany(mappedBy = "notice", cascade = CascadeType.REMOVE)
     private List<Comment> comments;
 }

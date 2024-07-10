@@ -2,6 +2,7 @@ package com.mysite.crud;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.GetObjectRequest;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +21,6 @@ public class S3Service {
     private String bucketName;
 
     private final AmazonS3 amazonS3;
-
     public void UploadFile(MultipartFile multipartFile, String filename) throws IOException {
         File file = new File(multipartFile.getOriginalFilename());
         // 현재 서버에 임시 저장
@@ -34,9 +35,20 @@ public class S3Service {
         //임시 저장된 파일 삭제
         file.delete();
     }
-    public void DownloadFile(String filename) throws IOException {
-        amazonS3.getObject(new GetObjectRequest(bucketName, filename));
+    //다중 파일 업로드 (임시 파일 저장 시스템이 아닌 메타 데이터 저장방식 이용)
+    public String uploadmanyFiles(MultipartFile multipartFile) throws IOException {
+        if (multipartFile.isEmpty()) {
+            throw new IllegalStateException("빈 파일은 업로드 할 수 없습니다.");
+        }
+        String originalFilename = multipartFile.getOriginalFilename();
+        String fileExtension = originalFilename.substring(originalFilename.lastIndexOf('.'));
+        String filename = UUID.randomUUID() + fileExtension; // UUID와 확장자를 조합한 파일 이름
 
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setContentLength(multipartFile.getSize());
+        metadata.setContentType(multipartFile.getContentType());
+
+        amazonS3.putObject(new PutObjectRequest(bucketName, filename, multipartFile.getInputStream(), metadata));
+        return filename; // 생성된 고유 파일 이름을 반환(UUID추가된 파일)
     }
-
 }
