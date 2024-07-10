@@ -50,11 +50,13 @@ public class NoticeController {
     @GetMapping("/notice_update/{id}")
     public String noticeUpdate(@PathVariable int id, Model model) {
         model.addAttribute("notice",noticeService.getNotice(id));
+        model.addAttribute("downpath","https://"+downpath);
         return "/gimminu/notice/notice_update";
     }
     @PostMapping("/notice_update")
-    public String noticeUpdate(@ModelAttribute Notice notice) {
-        noticeService.update(notice);
+    public String noticeUpdate(@ModelAttribute Notice notice,
+                               @RequestParam("files") List<MultipartFile> files) throws IOException {
+        noticeService.update(notice, files);
         return "redirect:/gimminu/notice/notice_detail/" + notice.getId();  // 올바른 리디렉션 경로
     }
 
